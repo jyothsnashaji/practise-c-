@@ -1,4 +1,4 @@
-/* given x, find all pairs in a array that sums up to x
+/* Diameter of a tree
 */
 
 #include<bits/stdc++.h>
