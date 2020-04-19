@@ -61,11 +61,11 @@ public:
             if (!visited[i])
                 topologicalSortRecursive(i, visited, s);
         }
-        char str[v];
-            for(int i=0;i<v;++i)
+        string str;
+        while (!s.empty())
         {
-            str[i] = s.top() + 'a';
-            //cout << s.top() << " ";
+            str.push_back(s.top() + 'a');
+            // cout <<(char) (s.top()+'a');
             s.pop();
         }
         return str;
@@ -76,20 +76,19 @@ string order(string dict[], int n, int k)
     Graph g(k);
     for (int i = 0; i < n - 1; ++i)
     {
-        for (int j = i + 1; j < n; ++j)
+
+        if (dict[i] != dict[j])
         {
-            if (dict[i] != dict[j])
-            {
-                auto mis = mismatch(dict[i].begin(), dict[i].end(), dict[j].begin());
+            auto mis = mismatch(dict[i].begin(), dict[i].end(), dict[j].begin());
+            if (mis.first != dict[i].end() && mis.second != dict[i + 1].end())
                 g.addEdge(*mis.first - 'a', *mis.second - 'a');
-                //cout << *mis.first - 'a' << " " << *mis.second - 'a' << "\n";
-            }
+            // cout << *mis.first - 'a' << " " << *mis.second - 'a' << "..\n";
         }
     }
     //g.printEdges();
+
     return g.topologicalSort();
 }
-
 int main()
 {
     int t, n, k;
